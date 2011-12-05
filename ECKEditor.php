@@ -65,8 +65,8 @@ class ECKEditor extends CInputWidget {
     );
 
     private $toolbar=array();
-    
-    private $skin='kama';
+
+    public $skin = 'kama';
     private $theme='default';
 
 
@@ -198,18 +198,6 @@ class ECKEditor extends CInputWidget {
         return $this->toolbar;
     }
 
-    public function setSkin($value)
-    {
-        if (!is_string($value))
-            throw new CException(Yii::t(__CLASS__, 'Skin must be a string'));
-        $this->skin = $value;
-    }
-
-    public function getSkin()
-    {
-        return $this->skin;
-    }
-
     public function setTheme($value)
     {
         if (!is_string($value))
@@ -257,7 +245,6 @@ class ECKEditor extends CInputWidget {
         $options['fontSize_sizes']=$fontSizes;
         
         $options['extraPlugins'] = implode(',', $this->plugins);
-
         $options['skin']=$this->skin;
         $options['theme']=$this->theme;
       // here any option is overriden by user's options
@@ -273,8 +260,7 @@ class ECKEditor extends CInputWidget {
 
         list($name, $id) = $this->resolveNameID();
 
-        $baseDir = dirname(__FILE__);
-        $assets = Yii::app()->getAssetManager()->publish($baseDir.DIRECTORY_SEPARATOR.'assets');
+        $assets = Yii::app()->request->baseUrl.'/vendors/ckeditor';
 
         $options = $this->makeOptions();
 
